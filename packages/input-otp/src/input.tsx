@@ -362,11 +362,12 @@ export const OTPInput = React.forwardRef<HTMLInputElement, OTPInputProps>(
         }}
         onDoubleClick={e => {
           const lastClickTimestamp =
-            inputRef.current?.__metadata__?.lastClickTimestamp
+            inputRef.current?.__metadata__?.lastClickData?.timestamp
 
           const isFocusing = document.activeElement === e.currentTarget
           if (
             lastClickTimestamp !== undefined &&
+            inputRef.current?.__metadata__?.lastClickData?.wasFocused &&
             isFocusing &&
             Date.now() - lastClickTimestamp <= 300 // Fast enough click
           ) {
@@ -475,7 +476,7 @@ export const inputStyle = {
   width: '100%',
   height: '100%',
   display: 'flex',
-  textAlign: 'center',
+  // textAlign: 'center',
   opacity: '1', // Mandatory for iOS hold-paste
   color: 'transparent',
   pointerEvents: 'all',
@@ -486,11 +487,9 @@ export const inputStyle = {
   lineHeight: '1',
   letterSpacing: '-.5em',
   fontSize: 'var(--root-height)',
-  // letterSpacing: '-1em',
-  // transform: 'scale(1.5)',
-  // paddingRight: '100%',
-  // paddingBottom: '100%',
   // debugging purposes
+  // background: 'white',
+  // color: 'black',
   // inset: undefined,
   // position: undefined,
   // color: 'black',

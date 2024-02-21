@@ -28,5 +28,5 @@ export enum SelectionType {
   MULTI = 2,
 }
 export interface Metadata {
-  lastClickTimestamp: number
+  lastClickData?: { timestamp: number, wasFocused: boolean }
 }
